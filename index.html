@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Berita Kabar_PBSIUMUS</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --danger-color: #dc3545;
+            --success-color: #198754;
+            --border-radius: 50px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .top-bar span i {
+            margin-right: 5px;
+            color: #7952b3;
+        }
+
+        /* Header & Banner Ungu ala Vercel */
+        header {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: white;
+            padding: 20px 15px 15px 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .logo-container {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .logo-small {
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffd700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Search Box di Header */
+        .search-box-container {
+            display: flex;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            padding: 3px 5px 3px 15px;
+            align-items: center;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 0.85rem;
+            padding: 6px 0;
+        }
+
+        .search-btn {
+            background: #ffc107;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #212529;
+            font-size: 0.9rem;
+        }
+
+        .user-status-bar {
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+        }
+
+        /* Kategori Navigasi Horizontal */
+        .category-nav {
+            background: white;
+            padding: 10px 15px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            align-items: center;
+            scrollbar-width: none;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .cat-item {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cat-item.active {
+            background: #f0f0ff;
+            color: #3a1c71;
+        }
+
+        /* Ticker / Berita Terkini */
+        .ticker-container {
+            background-color: #212529;
+            color: white;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-badge {
+            background: #ff4757;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ticker-text {
+            display: inline-block;
+            animation: ticker 25s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 1200px;
+            margin: 15px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 2fr 1fr;
+                padding: 0 20px;
+                margin: 25px auto;
+            }
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-color);
+        }
+
+        .btn-upload-purple {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(106, 17, 203, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* News Card */
+        .news-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .news-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .news-img, .news-video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .news-content {
+            padding: 15px;
+        }
+
+        .news-badge {
+            background: #e0e0ff;
+            color: #4a00e0;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .news-meta {
+            font-size: 0.72rem;
+            color: var(--secondary-color);
+            margin-bottom: 6px;
+        }
+
+        .news-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .news-title:hover {
+            color: var(--primary-color);
+        }
+
+        .news-desc {
+            font-size: 0.82rem;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .news-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-oval {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-oval.liked {
+            background-color: #dc3545 !important; 
+        }
+
+        .btn-outline-oval {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 4px 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Tombol Edit & Hapus (Admin Only) */
+        .btn-warning-oval {
+            background-color: #ffc107;
+            color: #212529;
+            padding: 4px 10px;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-size: 0.72rem;
+            font-weight: 600;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-danger-oval {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-size: 0.72rem;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        body.admin-logged-in .btn-warning-oval,
+        body.admin-logged-in .btn-danger-oval {
+            display: inline-flex;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .ad-box {
+            background: #25d366;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .ad-box a {
+            color: white;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* Kolom Komentar Dinamis & Estetik */
+        .comment-section {
+            margin-top: 15px;
+            border-top: 1.5px dashed #e0d4fc;
+            padding-top: 12px;
+        }
+
+        .modal-comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 12px;
+        }
+
+        .comment-bubble {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            background: #f7f5ff;
+            padding: 8px 12px;
+            border-radius: 15px;
+            border: 1px solid #efe8ff;
+        }
+
+        .comment-avatar {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .comment-body {
+            flex: 1;
+            font-size: 0.78rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #6a11cb;
+            margin-bottom: 2px;
+        }
+
+        .comment-text {
+            color: #444;
+            word-break: break-word;
+        }
+
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* Modal Umum */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 25px 20px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(106, 17, 203, 0.2);
+            border: 2px solid #e0d4fc;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #6a11cb;
+        }
+    </style>
+</head>
+<body id="pageBody">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-calendar-days"></i> Rabu, 7 Oktober 2026</span>
+        <span><i class="fa-solid fa-network-wired"></i> Network Kabar_PBSIUMUS Media</span>
+    </div>
+
+    <!-- Header & Navigasi Ungu -->
+    <header>
+        <div class="header-top">
+            <div class="logo-container" onclick="handleLogoClick()">
+                <div class="logo-small">Portal Berita</div>
+                <div class="logo-main">Kabar_PBSIUMUS</div>
+            </div>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box-container">
+            <input type="text" id="searchInput" class="search-input" onkeyup="searchNews()" placeholder="Cari berita terkini...">
+            <button class="search-btn" onclick="searchNews()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <!-- Status Pengunjung -->
+        <div class="user-status-bar">
+            <span id="welcomeUserText">Halo, Pengunjung</span>
+            <span id="authStatusIndicator" style="font-size: 0.75rem; opacity: 0.8;">Mode Publik</span>
+        </div>
+    </header>
+
+    <!-- Kategori Menu Horizontal -->
+    <div class="category-nav">
+        <a class="cat-item active" onclick="filterCategory('PBSI_UMUS', this)">PBSI_UMUS</a>
+        <a class="cat-item" onclick="filterCategory('Politik & Pemerintahan', this)">Politik & Pemerintahan</a>
+        <a class="cat-item" onclick="filterCategory('Ekonomi & Bisnis', this)">Ekonomi & Bisnis</a>
+        <a class="cat-item" onclick="filterCategory('Kriminal & Hukum', this)">Kriminal & Hukum</a>
+        <a class="cat-item" onclick="filterCategory('Olahraga', this)">Olahraga</a>
+        <a class="cat-item" onclick="filterCategory('Teknologi & Sains', this)">Teknologi & Sains</a>
+        <a class="cat-item" onclick="filterCategory('Hiburan & Seni', this)">Hiburan & Seni</a>
+        <a class="cat-item" onclick="filterCategory('Pendidikan', this)">Pendidikan</a>
+        <a class="cat-item" onclick="filterCategory('Gaya Hidup', this)">Gaya Hidup</a>
+    </div>
+
+    <!-- Running Text -->
+    <div class="ticker-container">
+        <div class="ticker-badge"><i class="fa-solid fa-bolt"></i> TERKINI</div>
+        <div style="overflow: hidden; flex: 1;">
+            <div class="ticker-text">
+                Selamat datang di portal berita terhangat hari ini. Informasi terpadu seputar kampus dan dunia pendidikan.
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Kolom Berita Utama -->
+        <main>
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-newspaper" style="color: #6a11cb;"></i> Berita Utama</h2>
+                <button class="btn-upload-purple" onclick="handleUploadClick()">+ Upload Berita Baru</button>
+            </div>
+
+            <!-- Kontainer Berita -->
+            <div class="news-grid" id="newsContainer">
+                <div style="text-align: center; padding: 30px; color: #777; font-size: 0.85rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <i class="fa-solid fa-folder-open" style="font-size: 2rem; color: #6a11cb; margin-bottom: 10px; display: block;"></i>
+                    Memuat berita dari server...
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="widget ad-box">
+                <h3 style="margin-bottom: 8px; font-size: 1rem;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Jagat</h3>
+                <p style="font-size: 0.83rem; margin-bottom: 10px;">Pasang iklan atau jangkau pembaca lebih luas bersama kami.</p>
+                <a href="https://wa.me/" target="_blank">Hubungi Kami</a>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modal Password Admin -->
+    <div class="modal" id="adminPasswordModal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closePasswordModal()">&times;</span>
+            <div style="background: #e0d4fc; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; color: #6a11cb; font-size: 1.2rem;">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 style="margin-bottom: 8px; color: #6a11cb; font-size: 1.1rem;">Login Admin</h3>
+            <p style="font-size: 0.78rem; color: #555; margin-bottom: 15px;">Masukkan password rahasia untuk mengakses mode admin.</p>
+            
+            <div style="position: relative; margin-bottom: 15px;">
+                <input type="password" id="adminPasswordInput" placeholder="Masukkan password..." style="width: 100%; padding: 10px 40px 10px 15px; border-radius: 50px; border: 1.5px solid #6a11cb; font-size: 0.85rem; outline: none; background: white;">
+                <span onclick="togglePasswordVisibility()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #6a11cb; font-size: 0.9rem;">
+                    <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+
+            <button class="btn-upload-purple" onclick="verifyAdminPassword()" style="width: 100%; justify-content: center; border-radius: 50px; padding: 10px;">Masuk Admin</button>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Keluar Admin -->
+    <div class="modal" id="adminLogoutModal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closeLogoutModal()">&times;</span>
+            <div style="background: #ffe6e6; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; color: #dc3545; font-size: 1.2rem;">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </div>
+            <h3 style="margin-bottom: 8px; color: #dc3545; font-size: 1.1rem;">Keluar Admin</h3>
+            <p style="font-size: 0.82rem; color: #555; margin-bottom: 20px;">Apakah Anda yakin ingin keluar dari mode Admin?</p>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="closeLogoutModal()" style="flex: 1; padding: 10px; border-radius: 50px; border: 1px solid #ccc; background: #f1f1f1; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Batal</button>
+                <button onclick="confirmLogout()" style="flex: 1; padding: 10px; border-radius: 50px; border: none; background: #dc3545; color: white; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Keluar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus Berita -->
+    <div class="modal" id="deleteConfirmModal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closeDeleteModal()">&times;</span>
+            <div style="background: #ffe6e6; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; color: #dc3545; font-size: 1.2rem;">
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <h3 style="margin-bottom: 8px; color: #dc3545; font-size: 1.1rem;">Hapus Berita</h3>
+            <p style="font-size: 0.82rem; color: #555; margin-bottom: 20px;">Apakah Anda yakin ingin menghapus berita ini? (Khusus Admin)</p>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="closeDeleteModal()" style="flex: 1; padding: 10px; border-radius: 50px; border: 1px solid #ccc; background: #f1f1f1; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Batal</button>
+                <button onclick="executeDeleteNews()" style="flex: 1; padding: 10px; border-radius: 50px; border: none; background: #dc3545; color: white; cursor: pointer; font-weight: 600; font-size: 0.8rem;">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Publik -->
+    <div class="modal" id="uploadPublicModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeUploadPublicModal()">&times;</span>
+            <h3 style="margin-bottom: 12px; color: #6a11cb; font-size: 1.1rem;">Kirim / Publikasi Berita</h3>
+            <p style="font-size: 0.83rem; color: #555; margin-bottom: 15px;">
+                Bagi pembaca umum yang ingin mengirimkan berita, silakan kirimkan draf melalui email resmi kami:
+            </p>
+            <a href="mailto:beritaportal6@gmail.com?subject=Pengajuan%20Berita%20Baru" class="btn-upload-purple" style="width: 100%; justify-content: center; border-radius: 50px;">
+                <i class="fa-solid fa-envelope"></i> beritaportal6@gmail.com
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal Admin (Upload) -->
+    <div class="modal" id="uploadAdminModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeUploadAdminModal()">&times;</span>
+            <h3 style="margin-bottom: 12px; color: #6a11cb; font-size: 1.1rem;">Upload Berita Baru (Admin)</h3>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Judul Berita</label>
+                <input type="text" id="newTitleInput" placeholder="Masukkan judul berita..." style="width: 100%; padding: 8px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.82rem; outline: none;">
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Kategori</label>
+                <select id="newCategorySelect" style="width: 100%; padding: 8px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.82rem; outline: none; background: white;">
+                    <option value="PBSI_UMUS">PBSI_UMUS</option>
+                    <option value="Politik & Pemerintahan">Politik & Pemerintahan</option>
+                    <option value="Ekonomi & Bisnis">Ekonomi & Bisnis</option>
+                    <option value="Kriminal & Hukum">Kriminal & Hukum</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Teknologi & Sains">Teknologi & Sains</option>
+                    <option value="Hiburan & Seni">Hiburan & Seni</option>
+                    <option value="Pendidikan">Pendidikan</option>
+                    <option value="Gaya Hidup">Gaya Hidup</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Upload Foto / Video (Dari Perangkat)</label>
+                <input type="file" id="newMediaInput" accept="image/*,video/*" style="width: 100%; padding: 7px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.8rem; outline: none; background: white;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Deskripsi / Isi Singkat</label>
+                <textarea id="newDescInput" rows="3" placeholder="Tulis ringkasan berita..." style="width: 100%; padding: 10px 12px; border-radius: 15px; border: 1px solid #ccc; font-size: 0.82rem; outline: none;"></textarea>
+            </div>
+
+            <button class="btn-upload-purple" onclick="publishNewNews()" style="width: 100%; justify-content: center; border-radius: 50px; padding: 10px;">Publikasikan Berita</button>
+        </div>
+    </div>
+
+    <!-- Modal Baca Selengkapnya & Komentar Dinamis -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeDetailModal()">&times;</span>
+            <h2 id="modalTitle" style="font-size: 1.15rem; margin-bottom: 8px; color: #6a11cb;"></h2>
+            <p id="modalMeta" style="font-size: 0.72rem; color: var(--secondary-color); margin-bottom: 10px;"></p>
+            <div id="modalMediaContainer" style="width: 100%; margin-bottom: 10px;"></div>
+            <p id="modalFullDesc" style="font-size: 0.82rem; color: #444; line-height: 1.6; margin-bottom: 15px;"></p>
+            
+            <button class="btn-outline-oval" onclick="toggleModalComments(this)" style="width: 100%; justify-content: center; margin-bottom: 10px;">
+                <i class="fa-solid fa-comments"></i> Kolom Komentar
+            </button>
+            
+            <div id="modalCommentSec" class="comment-section" style="display: none;">
+                <div class="modal-comments-list" id="commentListContainer">
+                    <div class="comment-bubble">
+                        <div class="comment-avatar">B</div>
+                        <div class="comment-body">
+                            <div class="comment-author">Budi</div>
+                            <div class="comment-text">Berita yang sangat menginspirasi!</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 5px; margin-top: 8px;">
+                    <input type="text" id="commentInputBox" placeholder="Tulis komentar..." style="flex: 1; padding: 7px 12px; font-size: 0.78rem; border-radius: 20px; border: 1px solid #ccc; outline: none; background: white;">
+                    <button class="btn-oval" onclick="addModalComment()">Kirim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Berita -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <h3 style="margin-bottom: 12px; font-size: 1.1rem; color: #6a11cb;">Edit Berita (Admin)</h3>
+            <input type="hidden" id="editCardId">
+            <div style="margin-bottom: 10px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Judul Berita</label>
+                <input type="text" id="editTitleInput" style="width: 100%; padding: 8px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.82rem; outline: none;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.78rem; display: block; margin-bottom: 3px;">Deskripsi Berita</label>
+                <textarea id="editDescInput" rows="4" style="width: 100%; padding: 10px 12px; border-radius: 15px; border: 1px solid #ccc; font-size: 0.82rem; outline: none;"></textarea>
+            </div>
+            <button class="btn-upload-purple" onclick="saveEditedNews()" style="width: 100%; justify-content: center; border-radius: 50px; padding: 10px;">Simpan Perubahan</button>
+        </div>
+    </div>
+
+    <!-- Modal Notifikasi Kustom -->
+    <div class="modal" id="customAlertModal">
+        <div class="modal-content" style="text-align: center; max-width: 340px;">
+            <div id="alertIconContainer" style="background: #e0d4fc; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; color: #6a11cb; font-size: 1.2rem;">
+                <i class="fa-solid fa-circle-info" id="alertIcon"></i>
+            </div>
+            <h3 id="alertTitle" style="margin-bottom: 8px; color: #6a11cb; font-size: 1.1rem;">Informasi</h3>
+            <p id="alertMessage" style="font-size: 0.82rem; color: #555; margin-bottom: 20px; line-height: 1.5;"></p>
+            <button class="btn-upload-purple" onclick="closeCustomAlert()" style="width: 100%; justify-content: center; border-radius: 50px; padding: 10px;">OK</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Portal Berita Kabar_PBSIUMUS. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase & JavaScript Interaktif -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVoPdpEWVUWpf96B5tYhdSVxW23KtNpMI",
+            authDomain: "portal-berita-pbsi-umus-8e22a.firebaseapp.com",
+            projectId: "portal-berita-pbsi-umus-8e22a",
+            storageBucket: "portal-berita-pbsi-umus-8e22a.firebasestorage.app",
+            messagingSenderId: "1070804754940",
+            appId: "1:1070804754940:web:85caf0ff9aeeb19e6b9279",
+            measurementId: "G-3F5748V9N7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let logoClickCount = 0;
+        let clickTimer = null;
+        let isAdminLoggedIn = false;
+        let selectedCardToDelete = null;
+        let currentActiveCategory = 'PBSI_UMUS';
+        let newsCache = {};
+
+        window.showCustomAlert = function(message, title = "Informasi", type = "info") {
+            document.getElementById('alertTitle').innerText = title;
+            document.getElementById('alertMessage').innerText = message;
+            
+            let iconBox = document.getElementById('alertIconContainer');
+            let icon = document.getElementById('alertIcon');
+
+            if(type === "success") {
+                iconBox.style.background = "#e1f5fe";
+                iconBox.style.color = "#0288d1";
+                icon.className = "fa-solid fa-circle-check";
+            } else if(type === "error") {
+                iconBox.style.background = "#ffe6e6";
+                iconBox.style.color = "#dc3545";
+                icon.className = "fa-solid fa-circle-exclamation";
+            } else {
+                iconBox.style.background = "#e0d4fc";
+                iconBox.style.color = "#6a11cb";
+                icon.className = "fa-solid fa-circle-info";
+            }
+
+            document.getElementById('customAlertModal').style.display = 'flex';
+        }
+
+        window.closeCustomAlert = function() {
+            document.getElementById('customAlertModal').style.display = 'none';
+        }
+
+        window.handleLogoClick = function() {
+            logoClickCount++;
+            clearTimeout(clickTimer);
+
+            if (logoClickCount === 5) {
+                logoClickCount = 0;
+                if (!isAdminLoggedIn) {
+                    document.getElementById('adminPasswordInput').value = '';
+                    document.getElementById('adminPasswordModal').style.display = 'flex';
+                } else {
+                    document.getElementById('adminLogoutModal').style.display = 'flex';
+                }
+            } else {
+                clickTimer = setTimeout(() => {
+                    logoClickCount = 0;
+                }, 1000);
+            }
+        }
+
+        window.togglePasswordVisibility = function() {
+            let pwdInput = document.getElementById('adminPasswordInput');
+            let eyeIcon = document.getElementById('eyeIcon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+        window.closePasswordModal = function() {
+            document.getElementById('adminPasswordModal').style.display = 'none';
+        }
+
+        window.closeLogoutModal = function() {
+            document.getElementById('adminLogoutModal').style.display = 'none';
+        }
+
+        window.verifyAdminPassword = function() {
+            let pass = document.getElementById('adminPasswordInput').value;
+            if (pass === "Mustika25") {
+                isAdminLoggedIn = true;
+                document.body.classList.add("admin-logged-in");
+                document.getElementById("welcomeUserText").innerText = "Halo, Admin PBSIUMUS";
+                document.getElementById("authStatusIndicator").innerText = "Mode Admin Aktif";
+                closePasswordModal();
+                showCustomAlert("Berhasil Login sebagai Admin!", "Login Berhasil", "success");
+                renderNewsFromCache();
+            } else {
+                showCustomAlert("Password salah! Silakan coba lagi.", "Gagal Login", "error");
+            }
+        }
+
+        window.confirmLogout = function() {
+            isAdminLoggedIn = false;
+            document.body.classList.remove("admin-logged-in");
+            document.getElementById("welcomeUserText").innerText = "Halo, Pengunjung";
+            document.getElementById("authStatusIndicator").innerText = "Mode Publik";
+            closeLogoutModal();
+            showCustomAlert("Berhasil keluar dari mode Admin.", "Keluar Admin", "info");
+            renderNewsFromCache();
+        }
+
+        window.handleUploadClick = function() {
+            if (isAdminLoggedIn) {
+                document.getElementById('uploadAdminModal').style.display = 'flex';
+            } else {
+                document.getElementById('uploadPublicModal').style.display = 'flex';
+            }
+        }
+
+        window.closeUploadPublicModal = function() {
+            document.getElementById('uploadPublicModal').style.display = 'none';
+        }
+
+        window.closeUploadAdminModal = function() {
+            document.getElementById('uploadAdminModal').style.display = 'none';
+        }
+
+        window.publishNewNews = async function() {
+            let title = document.getElementById('newTitleInput').value.trim();
+            let category = document.getElementById('newCategorySelect').value;
+            let fileInput = document.getElementById('newMediaInput');
+            let desc = document.getElementById('newDescInput').value.trim();
+
+            if (title === '' || desc === '') {
+                showCustomAlert('Judul dan Deskripsi berita tidak boleh kosong!', 'Perhatian', 'error');
+                return;
+            }
+
+            let saveToFirestore = async (mediaUrl, isVideo) => {
+                try {
+                    await addDoc(collection(db, "posts"), {
+                        title: title,
+                        category: category,
+                        desc: desc,
+                        mediaUrl: mediaUrl,
+                        isVideo: isVideo,
+                        likes: 0,
+                        createdAt: new Date().toISOString()
+                    });
+                    
+                    document.getElementById('newTitleInput').value = '';
+                    document.getElementById('newDescInput').value = '';
+                    fileInput.value = '';
+                    closeUploadAdminModal();
+                    showCustomAlert('Berita baru berhasil di-upload dan dipublikasikan secara online!', 'Sukses', 'success');
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                    showCustomAlert('Gagal mengunggah berita ke database.', 'Error', 'error');
+                }
+            };
+
+            if (fileInput.files && fileInput.files[0]) {
+                let file = fileInput.files[0];
+                let reader = new FileReader();
+                let isVideo = file.type.startsWith('video');
+
+                reader.onload = function(e) {
+                    saveToFirestore(e.target.result, isVideo);
+                }
+                reader.readAsDataURL(file);
+            } else {
+                let defaultImg = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80";
+                saveToFirestore(defaultImg, false);
+            }
+        }
+
+        window.filterCategory = function(category, element) {
+            let items = document.querySelectorAll('.cat-item');
+            items.forEach(item => item.classList.remove('active'));
+            if(element) element.classList.add('active');
+            currentActiveCategory = category;
+            renderNewsFromCache();
+        }
+
+        window.toggleLike = async function(docId, currentLikes, btn) {
+            let newLikes = currentLikes + 1;
+            btn.classList.add('liked');
+            try {
+                await updateDoc(doc(db, "posts", docId), { likes: newLikes });
+            } catch(e) {
+                console.error("Error updating likes: ", e);
+            }
+        }
+
+        window.openDetailModal = function(id) {
+            let post = newsCache[id];
+            if(post) {
+                document.getElementById('modalTitle').innerText = post.title;
+                document.getElementById('modalMeta').innerHTML = 'Admin / Redaksi • 7/10/2026';
+                
+                let modalMediaContainer = document.getElementById('modalMediaContainer');
+                if (post.isVideo) {
+                    modalMediaContainer.innerHTML = `<video src="${post.mediaUrl}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 15px; background: #000;" controls></video>`;
+                } else {
+                    modalMediaContainer.innerHTML = `<img src="${post.mediaUrl}" alt="Gambar" style="width: 100%; height: 160px; object-fit: cover; border-radius: 15px;">`;
+                }
+
+                document.getElementById('modalFullDesc').innerText = post.desc + " Pembahasan lengkap ini memberikan wawasan mendalam mengenai perkembangan informasi terkait secara utuh dan terpercaya.";
+                document.getElementById('detailModal').style.display = 'flex';
+            }
+        }
+        
+        window.closeDetailModal = function() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        window.toggleModalComments = function(btn) {
+            let sec = document.getElementById('modalCommentSec');
+            sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
+        }
+
+        window.addModalComment = function() {
+            let input = document.getElementById('commentInputBox');
+            let container = document.getElementById('commentListContainer');
+            let text = input.value.trim();
+
+            if (text !== '') {
+                let authorName = isAdminLoggedIn ? "Admin PBSIUMUS" : "Pengunjung";
+                let initial = authorName.charAt(0).toUpperCase();
+
+                let bubble = document.createElement('div');
+                bubble.className = 'comment-bubble';
+                bubble.innerHTML = `
+                    <div class="comment-avatar">${initial}</div>
+                    <div class="comment-body">
+                        <div class="comment-author">${authorName}</div>
+                        <div class="comment-text">${text}</div>
+                    </div>
+                `;
+                container.appendChild(bubble);
+                input.value = '';
+                container.scrollTop = container.scrollHeight; 
+            } else {
+                showCustomAlert('Komentar tidak boleh kosong!', 'Perhatian', 'error');
+            }
+        }
+
+        window.openEditModal = function(id) {
+            let post = newsCache[id];
+            if(post) {
+                document.getElementById('editCardId').value = id;
+                document.getElementById('editTitleInput').value = post.title;
+                document.getElementById('editDescInput').value = post.desc;
+                document.getElementById('editModal').style.display = 'flex';
+            }
+        }
+
+        window.closeEditModal = function() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        window.saveEditedNews = async function() {
+            let id = document.getElementById('editCardId').value;
+            let newTitle = document.getElementById('editTitleInput').value.trim();
+            let newDesc = document.getElementById('editDescInput').value.trim();
+
+            if (newTitle !== '' && newDesc !== '') {
+                try {
+                    await updateDoc(doc(db, "posts", id), {
+                        title: newTitle,
+                        desc: newDesc
+                    });
+                    closeEditModal();
+                    showCustomAlert('Berita berhasil diperbarui!', 'Sukses', 'success');
+                } catch(e) {
+                    console.error("Error updating document: ", e);
+                    showCustomAlert('Gagal memperbarui berita.', 'Error', 'error');
+                }
+            }
+        }
+
+        window.confirmDeleteNews = function(docId) {
+            selectedCardToDelete = docId;
+            document.getElementById('deleteConfirmModal').style.display = 'flex';
+        }
+
+        window.closeDeleteModal = function() {
+            document.getElementById('deleteConfirmModal').style.display = 'none';
+            selectedCardToDelete = null;
+        }
+
+        window.executeDeleteNews = async function() {
+            if (selectedCardToDelete) {
+                try {
+                    await deleteDoc(doc(db, "posts", selectedCardToDelete));
+                    closeDeleteModal();
+                    showCustomAlert('Berita berhasil dihapus dari server.', 'Informasi', 'info');
+                } catch(e) {
+                    console.error("Error deleting document: ", e);
+                    showCustomAlert('Gagal menghapus berita.', 'Error', 'error');
+                }
+            }
+        }
+
+        window.searchNews = function() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.news-card');
+            
+            cards.forEach(card => {
+                let title = card.querySelector('.news-title').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function renderNewsFromCache() {
+            let container = document.getElementById('newsContainer');
+            container.innerHTML = '';
+            
+            let postsArray = Object.keys(newsCache).map(id => ({ id, ...newsCache[id] }));
+            let filtered = postsArray.filter(p => p.category === currentActiveCategory);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px; color: #777; font-size: 0.85rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <i class="fa-solid fa-folder-open" style="font-size: 2rem; color: #6a11cb; margin-bottom: 10px; display: block;"></i>
+                        Belum ada berita pada kategori ini.
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(post => {
+                let newCard = document.createElement('div');
+                newCard.className = 'news-card';
+                newCard.id = 'card-' + post.id;
+                newCard.setAttribute('data-category', post.category);
+
+                let mediaHtml = post.isVideo 
+                    ? `<video src="${post.mediaUrl}" class="news-video" controls></video>`
+                    : `<img src="${post.mediaUrl}" alt="Berita" class="news-img">`;
+
+                newCard.innerHTML = `
+                    ${mediaHtml}
+                    <div class="news-content">
+                        <span class="news-badge">${post.category}</span>
+                        <div class="news-meta">Admin • 7/10/2026</div>
+                        <a href="#" class="news-title" id="title-${post.id}">${post.title}</a>
+                        <p class="news-desc" id="desc-${post.id}">${post.desc}</p>
+                        
+                        <div class="news-actions">
+                            <button class="btn-oval ${post.likedByMe ? 'liked' : ''}" onclick="toggleLike('${post.id}', ${post.likes || 0}, this)" style="background: #2575fc;"><i class="fa-solid fa-thumbs-up"></i> Suka (<span class="like-count">${post.likes || 0}</span>)</button>
+                            <button class="btn-oval" onclick="openDetailModal('${post.id}')" style="background-color: var(--success-color);">Baca Selengkapnya</button>
+                            <button class="btn-warning-oval" onclick="openEditModal('${post.id}')"><i class="fa-solid fa-pen"></i> Edit</button>
+                            <button class="btn-danger-oval" onclick="confirmDeleteNews('${post.id}')"><i class="fa-solid fa-trash"></i> Hapus</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newCard);
+            });
+
+            if (isAdminLoggedIn) {
+                document.body.classList.add("admin-logged-in");
+            } else {
+                document.body.classList.remove("admin-logged-in");
+            }
+        }
+
+        // Real-time listener dari Firestore
+        onSnapshot(collection(db, "posts"), (snapshot) => {
+            newsCache = {};
+            snapshot.forEach((docSnap) => {
+                newsCache[docSnap.id] = docSnap.data();
+            });
+            renderNewsFromCache();
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
