@@ -911,7 +911,6 @@
         }
 
         window.publishNewNews = async function() {
-                window.publishNewNews = async function() {
             let title = document.getElementById('newTitleInput').value.trim();
             let category = document.getElementById('newCategorySelect').value;
             let fileInput = document.getElementById('newMediaInput');
@@ -941,19 +940,12 @@
                     showCustomAlert('Berita baru berhasil di-upload dan dipublikasikan secara online!', 'Sukses', 'success');
                 } catch (e) {
                     console.error("Error adding document: ", e);
-                    showCustomAlert('Gagal mengunggah berita. Ukuran file mungkin terlalu besar untuk database.', 'Error', 'error');
+                    showCustomAlert('Gagal mengunggah berita ke database.', 'Error', 'error');
                 }
             };
 
             if (fileInput.files && fileInput.files[0]) {
                 let file = fileInput.files[0];
-                
-                // Batasi ukuran file maksimal 800 KB agar aman untuk Firestore
-                if (file.size > 800 * 1024) {
-                    showCustomAlert('Ukuran file terlalu besar! Maksimal 800 KB agar dapat disimpan di database.', 'Perhatian', 'error');
-                    return;
-                }
-
                 let reader = new FileReader();
                 let isVideo = file.type.startsWith('video');
 
